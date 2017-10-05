@@ -1,0 +1,23 @@
+{
+  "name": "doorappserver",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.92.0",
+    "body-parser": "~1.17.1",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.3",
+    "express": "~4.15.2",
+    "fb": "~2.0.0",
+    "jade": "~1.11.0",
+    "morgan": "~1.8.1",
+    "mysql": "~2.14.0",
+    "pushwoosh": "0.0.1",
+    "pushwoosh-client": "^1.4.0",
+    "request": "^2.81.0",
+    "serve-favicon": "~2.4.2"
+  }
+}
