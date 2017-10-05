@@ -39,7 +39,7 @@ var registerDeviceOptions = {
 };
 
 // this will register the device for the client's 'AppCode' application
-push.registerDevice(registerDeviceOptions, function(error, pushres) {
-    console.log(error);
-    console.log(pushres);
-});
+// push.registerDevice(registerDeviceOptions, function(error, pushres) {
+//     console.log(error);
+//     console.log(pushres);
+// });

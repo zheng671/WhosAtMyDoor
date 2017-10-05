@@ -1,9 +1,10 @@
 var express = require('express');
 var FB = require('fb');
 var router = express.Router();
-var User = require('../Models/User');
+var User = require('../models/User');
 var aws = require('./aws.js');
-var push = require('./pushwoosh.js');
+// var push = require('./pushwoosh.js');
+var twilio = require('./twilio.js');
 var request = require('request').defaults({ encoding: null });
 
 /* GET home page. */
@@ -71,10 +72,20 @@ router.get('/', function(req, res, next) {
                 }
 
                 // this will register the device for the client's 'AppCode' application
-                push.registerDevice(registerDeviceOptions, function(error, pushres) {
+                // push.registerDevice(registerDeviceOptions, function(error, pushres) {
+                //     console.log(error);
+                //     console.log(pushres);
+                // });
+                twilio.bindings.create({
+                    identity: FacebookId,
+                    bindingType: deviceOS.toLocaleLowerCase() == 'ios' ? 'apn' : 'gcm',
+                    address: devicetoken
+                  }).then(function(binding) {
+                    console.log(binding);
+                  }).catch(function(error) {
                     console.log(error);
-                    console.log(pushres);
-                });
+                  });
+
                 
             } else {
                 res.send({ status_code: 500, error : { message: "Cannot read user information"} });

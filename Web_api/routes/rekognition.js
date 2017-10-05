@@ -1,9 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var aws = require('./aws.js');
-var push = require('./pushwoosh.js');
-var User = require('../Models/User');
-var db = require('../DAL/dbConnectionManager');
+// var push = require('./pushwoosh.js');
+var twilio = require('./twilio.js');
+var User = require('../models/User');
+var db = require('../dal/dbConnectionManager');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -46,10 +47,22 @@ router.get('/', function(req, res, next) {
                         addHistory(facebookId, result.join(", "));
                     }
 
-                    push.sendMessage(msg, device, {}, function(error, response) {
+                    // push.sendMessage(msg, device, {}, function(error, response) {
+                    //     console.log(error);
+                    //     console.log(response);
+                    // });
+                    twilio.notifications
+                        .create({
+                        identity: device,
+                        body: msg,
+                        })
+                        .then(notification => {
+                        console.log(notification);
+                        })
+                        .catch(error => {
                         console.log(error);
-                        console.log(response);
-                    });
+                        })
+                        .done();
                 }
             })
         }
