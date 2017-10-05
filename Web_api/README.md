@@ -1,15 +1,13 @@
 # DoorApp
 Final project for team 5 in the Mobile Application development.
 
-To deploy the project on an EC2 instance run the following commands from local
+The idea of this application is using Amazon rekognition service to detect the visitor's face and compare the face with Facebook friends of registed users to find who is visiting. After the detectio, it will send the notification to the user.
 
-scp -i <PemFile> -r <Source> ubuntu@<InstanceURL>:~/
+There are two kinds of push notification that the Web API is using: pushwoosh and twilio.
 
-ssh -i <PemFile> ubuntu@<InstanceURL> 'chmod +x ~/DoorApp/Script.sh'
-
-ssh -i <PemFile> ubuntu@<InstanceURL> 'bash ~/DoorApp/Script.sh'
-
-
-where PemFile is the personal secret key. Source is the source location and InstanceURL is the URL of the spawned instance.
-
-PS:- It really takes a long time to copy the folder to the instance. I would suggest zip it, and copy the zip file instead of the 1st command. You would have to unzip it on the instance before running commands 2 and 3. 
+asw.js:         AWS related service including upload image and detect face using rekognition service
+login.js:       This service will create user account and registe the device on push notification service
+rekognition.js: This service will detect the face and send the notification to the user
+visitor.js      This service will get all the recent
+pushwoodh.js:   Pushwoosh API
+twilio.js:      Twilio API
